@@ -23,6 +23,10 @@ export const sizePreferences = [
 export const colors = ["Red", "Blue", "Green", "Yellow", "Orange", "Purple", "Pink", "Brown", "Black", "White", "off-white", "coral", "cream", "Gray", "Cyan", "Magenta", "Lime", "Navy"];
 
 
-export const subCategories = ['t-shirt', 'jacket', 'hoodie', 'sweat shirt', 'pant', 'kameez', 'western tops', 'woman t-shirt', 'woman pant', 'shoes', 'woman shoes', 'watch', 'woman watch', 'woman bag', 'wallet', 'school bag', 'belt', 'sunglass', 'woman sunglass', 'android', 'laptop', 'hair dryer', 'headphone']
+export const subCategories = ['sharee', 'borka', 'hijab', 'kameez', 'wstern', 't-shirt', 'pant', 'watchs', 'bags', 'inner-wear', 'shoes', 'plazzos', 'jewellery', 'makeup', 'perfume', 't-shirt', 'jacket', 'hoodie', 'sweat shirt', 'pant', 'full sleeve shirt', 'jeans', 'shoes', 'sunglass', 'shorts', 'punjabi', 'under-wear', 'perfume', 'belt', 'wallet', 'hair care', 'body care', 'wall art', 'canvas', 'artificila tree', 'vase', 'light', 'wall mount watch', 'mirror', 'lamp', 'carpet', 'gyser', 'hair dryer', 'blender', 'rice cooker', 'refrigaretor', 'computer', 'mobail', 'laptop', 'headset']
 
-export const categories = ['mens', 'women', 'kids', 'accessories', 'care & beauty']
+export const categories = ['womans & girls fashion', 'mens & boys fashion', 'health and beauty', 'household & stationery', 'kids & baby', 'art and craft', 'electronic accessories', 'gadget & devices',]
+
+
+
+ 

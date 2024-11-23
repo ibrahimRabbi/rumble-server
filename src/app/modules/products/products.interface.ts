@@ -10,5 +10,6 @@ export type Tproducts = {
     sizes: string[],
     spacifications: string[],
     offer: number,
-    description: string
+    description: string,
+    isDeleted:boolean
 }

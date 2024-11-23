@@ -15,6 +15,7 @@ const productSchema = new Schema<Tproducts>({
     spacifications: { type: [String], required: true, trim: true },
     offer: { type: Number, required: true, trim: true },
     description: { type: String, required: true, trim: true },
+    isDeleted: { type: Boolean, default:false },
 }, { timestamps: true })
 
 export const productModel = model<Tproducts>('products', productSchema)
