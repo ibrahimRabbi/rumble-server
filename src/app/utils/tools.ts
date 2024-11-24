@@ -25,7 +25,7 @@ export const colors = ["Red", "Blue", "Green", "Yellow", "Orange", "Purple", "Pi
 
 export const subCategories = ['sharee', 'borka', 'hijab', 'kameez', 'wstern', 't-shirt', 'pant', 'watchs', 'bags', 'inner-wear', 'shoes', 'plazzos', 'jewellery', 'makeup', 'perfume', 't-shirt', 'jacket', 'hoodie', 'sweat shirt', 'pant', 'full sleeve shirt', 'jeans', 'shoes', 'sunglass', 'shorts', 'punjabi', 'under-wear', 'perfume', 'belt', 'wallet', 'hair care', 'body care', 'wall art', 'canvas', 'artificila tree', 'vase', 'light', 'wall mount watch', 'mirror', 'lamp', 'carpet', 'gyser', 'hair dryer', 'blender', 'rice cooker', 'refrigaretor', 'computer', 'mobail', 'laptop', 'headset']
 
-export const categories = ['womans & girls fashion', 'mens & boys fashion', 'health and beauty', 'household & stationery', 'kids & baby', 'art and craft', 'electronic accessories', 'gadget & devices',]
+export const categories = ['womans', 'mens', 'health and beauty', 'household & stationery', 'kids', 'art and craft', 'electronic accessories', 'gadget & devices',]
 
 
 

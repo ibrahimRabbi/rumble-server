@@ -1,6 +1,6 @@
 import { NextFunction, Request, response, Response } from "express";
 import { productModel } from "./products.model";
-import { getNewarrivalProductServices, getProductServices, getSubProduct } from "./products.services";
+import { getProductServices, getSubProduct } from "./products.services";
 
 
 export const insertproductController = async (req: Request, res: Response, next: NextFunction) => {
@@ -30,17 +30,6 @@ export const getSubProductController = async (req: Request, res: Response, next:
     
     try {
         const gettingProducts = await getSubProduct(req?.query)
-        res.status(200).json({ success: true, status: 200, response: gettingProducts })
-    } catch (err: any) {
-        next({ statusCode: 404, err })
-    }
-}
-
-
-export const getNewArrivalProductController = async (req: Request, res: Response, next: NextFunction) => {
-
-    try {
-        const gettingProducts = await getNewarrivalProductServices(req.query)
         res.status(200).json({ success: true, status: 200, response: gettingProducts })
     } catch (err: any) {
         next({ statusCode: 404, err })
