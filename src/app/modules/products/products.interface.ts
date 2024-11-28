@@ -12,6 +12,7 @@ export type Tproducts = {
     spacifications: string[],
     offer: string,
     description: string,
+    rating:number,
     isDeleted:boolean
 }
 

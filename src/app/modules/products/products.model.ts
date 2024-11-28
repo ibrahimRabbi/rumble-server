@@ -17,6 +17,7 @@ const productSchema = new Schema<Tproducts>({
     spacifications: { type: [String], required: true, trim: true },
     offer: { type: String, required: true, trim: true },
     description: { type: String, required: true, trim: true },
+    rating: { type: Number, default:0 },
     isDeleted: { type: Boolean, default:false },
 }, { timestamps: true })
 

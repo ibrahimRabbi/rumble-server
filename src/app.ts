@@ -7,7 +7,8 @@ import { globalErrorHandle } from './app/middleWare/globalError';
 import { signInRoute } from './app/modules/authentication/signin.route';
 import { prodcutRoute } from './app/modules/products/products.route';
 import { cartRoute } from './app/modules/cart/cart.route';
- 
+import { orderRoute } from './app/modules/orders/order.route';
+
 
 
 const app = express()
@@ -20,8 +21,9 @@ app.use(cors({ origin: 'http://localhost:3000', credentials: true }))
 app.use('/api', signupRoute)
 app.use('/api/auth', signInRoute)
 app.use('/api/products', prodcutRoute)
-app.use('/api/cart',cartRoute)
- 
+app.use('/api/cart', cartRoute)
+app.use('/api/order',orderRoute)
+
 
 
 //error
@@ -36,7 +38,7 @@ async function main() {
     app.listen(envData.port, () => {
         console.log(`server is running on ${envData.port}`)
     })
-     
+
 }
 
 main()

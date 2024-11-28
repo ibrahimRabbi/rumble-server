@@ -4,14 +4,17 @@ import { productModel } from "./products.model"
 
 
 export const getProductServices = async (query:any) => {
-     
-    const sort : SortOptions = {
-        "Low price": { price: 1 },
-        'High price': { price: -1 },
-        'new Arrival': { createdAt: -1 },
-        'Rating': { rating: 1 },
-        "relevance":{}
-        
+
+    if (query.category === "null") {
+        const finding = await productModel.find().limit(parseInt(query.limit))
+        return finding
+    }
+    
+    
+    
+    if (query.newArrival) {
+        const finding = await productModel.find().sort({ createdAt: -1 }).limit(parseInt(query.limit))
+        return finding
     }
 
 
@@ -29,31 +32,42 @@ export const getProductServices = async (query:any) => {
                 { category: query.category },
                 {subCategory: query.category}
             ]
-        })
+        }).limit(parseInt(query.limit))
+        return findingData 
+    }
+
+     
+    if (query.search) {
+        const findingData = await productModel.find({
+            $or: [
+                { title: { $regex: query.search, $options: 'i', } },
+                { category: { $regex: query.search, $options: 'ix', } },
+                { subCategory: { $regex: query.search, $options: 'i' } },
+                { title:  query.search },
+                { category: query.search },
+                { subCategory: query.search }
+            ]
+        }).limit(parseInt(query.limit))
         return findingData
-        
     }
 
 
-    if (query.newArrival) {
-        const finding = await productModel.find().sort({ createdAt: -1 }).limit(parseInt(query.limit))
+    if (query.gender) {
+        const finding = await productModel.find({gender:query.gender}).limit(parseInt(query.limit))
         return finding
     }
 
+    if (query.deal) {
+        const finding = await productModel.find().limit(parseInt(query.limit)) 
+        const findOfferProducts = finding.filter(v => v.offer !== '')
+        return findOfferProducts
+    }
 
-    // if (query.sort) {
-    //     const sortedBy = sort[query.sort as keyof SortOptions]  
-    //     const finding = await productModel.find().sort(sortedBy as any).limit(parseInt(query.limit))
-    //     return finding
-    // }
-    
-    
-    const finding = await productModel.find().limit(parseInt(query?.limit))
+    const finding = await productModel.find().limit(parseInt(query.limit))
     return finding
+   
 
 }
-
-
 
 
 
