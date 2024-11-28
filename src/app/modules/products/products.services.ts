@@ -10,19 +10,15 @@ export const getProductServices = async (query:any) => {
         return finding
     }
     
-    
-    
     if (query.newArrival) {
         const finding = await productModel.find().sort({ createdAt: -1 }).limit(parseInt(query.limit))
         return finding
     }
 
-
     if (query.id) {
         const findsingleData = await productModel.findById(query.id)
         return findsingleData
     }
-
      
     if (query.category) { 
         const findingData = await productModel.find({ 
