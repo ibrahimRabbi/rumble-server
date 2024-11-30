@@ -6,10 +6,12 @@ export type TorderDetails = { name: string, number: string, address: string, dis
 
 
 export type Torder = {
-    userId: Types.ObjectId,
+    email: string,
     orderId : string,
     items: Tcart[],
+    totalQuantity:number
     deliverDetails: TorderDetails,
     amount: number,
-    status: 'pending'| 'confirmed'| 'deliverd'
+    paymentStatus: 'paid' | 'unpaid' ,
+    orderStatus: 'pending' | 'confirmed' | 'delivered',
 }

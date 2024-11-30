@@ -9,7 +9,12 @@ export const createOrderservice = async (payload: Torder) => {
 
     const userEmail = payload.items[0].email
     const id = orderId.toUpperCase()
-    const orderData: Torder = { ...payload, status: 'pending', orderId: id }
+    const orderData: Torder = {
+        ...payload,
+        paymentStatus: 'unpaid',
+        orderStatus : 'pending',
+        orderId: id
+    }
     
     try {
         session.startTransaction()
@@ -35,4 +40,22 @@ export const createOrderservice = async (payload: Torder) => {
         return err
     }
 
+}
+
+
+
+
+export const getOrderService = async (email: string, query: any) => {
+   
+    if (query.search) {
+        const finded = await OrderModel.find({ 
+            $or: [
+                { orderId: { $regex: query.search, $options: 'i' } },
+                {orderId : query.search}
+            ]
+         }).sort({ createdAt: -1 })
+        return finded
+    }
+    const finded = await OrderModel.find({ email: email }).sort({ createdAt: -1 })
+    return finded
 }

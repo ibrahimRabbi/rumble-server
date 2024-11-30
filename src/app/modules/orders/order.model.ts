@@ -12,12 +12,14 @@ const deliverDetails = new Schema<TorderDetails>({
 
 
 const OrderSchema = new Schema<Torder>({
-    userId: { type: Schema.Types.ObjectId, ref: 'users', required: true, trim: true },
+    email: { type: String, required: true, trim: true },
     orderId : {type:String, required:true,trim:true},
     items: { type: [cartSchema], required: true },
+    totalQuantity: { type: Number, required : true},
     deliverDetails: { type: deliverDetails, required: true },
     amount: { type: Number, required: true }, 
-    status : {type:String,enum:['pending','confirmed','deliverd'], required:true, trim:true}
+    paymentStatus: { type: String, enum: ['paid','unpaid'], required: true, trim: true },
+    orderStatus: { type: String, enum: ['pending', 'confirmed', 'delivered'], required: true, trim: true }
 },{timestamps:true})
 
 
