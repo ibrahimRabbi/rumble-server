@@ -18,7 +18,7 @@ const OrderSchema = new Schema<Torder>({
     deliverDetails: { type: deliverDetails, required: true },
     amount: { type: Number, required: true }, 
     status : {type:String,enum:['pending','confirmed','deliverd'], required:true, trim:true}
-})
+},{timestamps:true})
 
 
 OrderSchema.pre('save', () => {

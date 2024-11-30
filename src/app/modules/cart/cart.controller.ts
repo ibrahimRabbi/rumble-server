@@ -34,3 +34,16 @@ export const deleteCartController = async (req: Request, res: Response, next: Ne
         next({ statusCode: 404, err })
     }
 }
+
+
+
+export const updateCartController = async (req: Request, res: Response, next: NextFunction) => {
+ 
+    try {
+        const insertingData = await cartModel.findByIdAndUpdate(req.params.id, req.body, { new: true})
+        res.status(200).json({ success: true, status: 200, message: 'item remove successfully', response: insertingData })
+    } catch (err: any) {
+        next({ statusCode: 404, err })
+    }
+}
+
