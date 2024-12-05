@@ -3,8 +3,16 @@ import { userModel } from "./user.model";
 import { signupService } from "./user.services";
 
 
-
 export const signupController = async (req: Request, res: Response, next: NextFunction) => {
+    try {
+        res.status(200).json({ success: true, status: 200, otp: req.otpCode })
+    } catch (err: any) {
+        next({ statusCode: 401, err })
+    }
+}
+
+
+export const otpVerifyController = async (req: Request, res: Response, next: NextFunction) => {
 
     try {
         const insertUserAndGetToken = await signupService(req.body)
@@ -13,6 +21,7 @@ export const signupController = async (req: Request, res: Response, next: NextFu
         next({ statusCode: 401, err })
     }
 }
+
 
 
 export const getsingleUserController = async (req: Request, res: Response, next: NextFunction) => {
@@ -29,6 +38,14 @@ export const updateUserController = async (req: Request, res: Response, next: Ne
     const data = req.body
 
     try {
+        const checkExistancy = await userModel.find({
+            deliverAddress: {
+                $elemMatch: { district: data.district, address: data.address }
+            } 
+        })
+        if (checkExistancy.length > 0) {
+           throw new Error('this details already added')
+       }
         const updateUser = await userModel.findOneAndUpdate(
             { email: req.user.email },
             { $addToSet: { deliverAddress: data } },
@@ -46,10 +63,10 @@ export const deleteAddressController = async (req: Request, res: Response, next:
     try {
         const deleteaddress = await userModel.findOneAndUpdate(
             { email: req.user.email },
-            { $pull: { deliverAddress: { $or: [{address: data?.address},{district:data?.district}]}} },
+            { $pull: { deliverAddress: { _id: data._id } } },
             { new: true }
         )
-        
+
         res.status(200).json({ success: true, status: 200, response: deleteaddress })
     } catch (err: any) {
         next({ statusCode: 401, err })
