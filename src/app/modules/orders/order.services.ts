@@ -4,10 +4,22 @@ import { cartModel } from "../cart/cart.model"
 import { Torder } from "./order.interface"
 import { OrderModel } from "./order.model"
 
+interface Item {
+    email: string;
+}
+
+interface Order {
+    items: Item[];
+}
+
+
+
+
+
 export const createOrderservice = async (payload: Torder) => {
     const session = await mongoose.startSession()
 
-    const userEmail = payload.items[0].email
+    const userEmail = payload.email  
     const id = orderId.toUpperCase()
     const orderData: Torder = {
         ...payload,

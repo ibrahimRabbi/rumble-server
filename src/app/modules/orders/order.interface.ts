@@ -8,10 +8,12 @@ export type TorderDetails = { name: string, number: string, address: string, dis
 export type Torder = {
     email: string,
     orderId : string,
-    items: Tcart[],
+    items: Tcart[] | Types.ObjectId,
     totalQuantity:number
     deliverDetails: TorderDetails,
     amount: number,
+    color: string,
+    size:string
     paymentStatus: 'paid' | 'unpaid' ,
     orderStatus: 'pending' | 'confirmed' | 'delivered',
 }
