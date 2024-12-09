@@ -4,13 +4,7 @@ import { cartModel } from "../cart/cart.model"
 import { Torder } from "./order.interface"
 import { OrderModel } from "./order.model"
 
-interface Item {
-    email: string;
-}
 
-interface Order {
-    items: Item[];
-}
 
 
 

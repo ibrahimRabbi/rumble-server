@@ -8,6 +8,7 @@ import { signInRoute } from './app/modules/authentication/signin.route';
 import { prodcutRoute } from './app/modules/products/products.route';
 import { cartRoute } from './app/modules/cart/cart.route';
 import { orderRoute } from './app/modules/orders/order.route';
+import { callRoute } from './app/modules/callRequest/call.route';
 
 
 
@@ -22,7 +23,8 @@ app.use('/api', signupRoute)
 app.use('/api/auth', signInRoute)
 app.use('/api/products', prodcutRoute)
 app.use('/api/cart', cartRoute)
-app.use('/api/order',orderRoute)
+app.use('/api/order', orderRoute)
+app.use('/api/request',callRoute)
 
 
 

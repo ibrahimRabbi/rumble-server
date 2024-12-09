@@ -3,6 +3,7 @@ import { userModel } from "../user/user.model";
 import { TsignIn } from "./signin.interface";
 import jwt from "jsonwebtoken";
 
+
 export const signInService = async (payload:TsignIn) => {
     const checkExistancy = await userModel.findOne({ email: payload.email })
 
@@ -18,6 +19,7 @@ export const signInService = async (payload:TsignIn) => {
     if (checkExistancy.isDeleted) {
         throw new Error('unthorized user')
     }
+    
     const credentials = {
         name: checkExistancy.name,
         email: checkExistancy.email,

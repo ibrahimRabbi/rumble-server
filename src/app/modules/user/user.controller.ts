@@ -1,6 +1,6 @@
-import { NextFunction, Request, Response } from "express";
+import { NextFunction, Request, response, Response } from "express";
 import { userModel } from "./user.model";
-import { signupService } from "./user.services";
+import { providerSignupService, signupService } from "./user.services";
 
 
 export const signupController = async (req: Request, res: Response, next: NextFunction) => {
@@ -16,6 +16,18 @@ export const otpVerifyController = async (req: Request, res: Response, next: Nex
 
     try {
         const insertUserAndGetToken = await signupService(req.body)
+        res.status(200).json({ success: true, status: 200, accessToken: insertUserAndGetToken })
+    } catch (err: any) {
+        next({ statusCode: 401, err })
+    }
+}
+
+
+
+
+export const providerSignupController = async (req: Request, res: Response, next: NextFunction) => {
+    try {
+        const insertUserAndGetToken = await providerSignupService(req.body)
         res.status(200).json({ success: true, status: 200, accessToken: insertUserAndGetToken })
     } catch (err: any) {
         next({ statusCode: 401, err })
