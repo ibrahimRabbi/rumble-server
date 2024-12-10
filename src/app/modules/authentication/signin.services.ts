@@ -23,9 +23,8 @@ export const signInService = async (payload:TsignIn) => {
     const credentials = {
         name: checkExistancy.name,
         email: checkExistancy.email,
-        phone: checkExistancy.phone,
         role: checkExistancy.role,
     }
-    const accessToken = jwt.sign(credentials, envData.secretKey as string, { expiresIn: '1h' })
+    const accessToken = jwt.sign(credentials, envData.secretKey as string, { expiresIn: '5h' })
     return accessToken
 }

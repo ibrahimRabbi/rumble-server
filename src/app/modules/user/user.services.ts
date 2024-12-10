@@ -28,8 +28,8 @@ export const signupService = async (payload: Tuser) => {
      const insertUser = await userModel.create(finalUserData)
 
      if (insertUser) {
-          const credentials = { name: payload.name, email: payload.email, phone: payload.phone, role: 'user' }
-          const accessToken = jwt.sign(credentials, envData.secretKey as string, { expiresIn: '3h' });
+          const credentials = { name: payload.name, email: payload.email, role: 'user' }
+          const accessToken = jwt.sign(credentials, envData.secretKey as string, { expiresIn: '5h' });
           return accessToken
      }
 
@@ -54,7 +54,7 @@ type Tprovider = {
 }
 
 export const providerSignupService = async (payload: Tprovider) => {
-     console.log(payload)
+     
      const userData = {
           name: payload.name,
           email: payload.email,
@@ -65,14 +65,14 @@ export const providerSignupService = async (payload: Tprovider) => {
 
      if (checkUserExistancy) {
           const credentials = { name: payload.name, email: payload.email, role: 'user' }
-          const accessToken = jwt.sign(credentials, envData.secretKey as string, { expiresIn: '3h' });
+          const accessToken = jwt.sign(credentials, envData.secretKey as string, { expiresIn: '5h' });
           return accessToken
           
      } else {
           const insertUser = await userModel.create(userData)
           if (insertUser) {
                const credentials = { name: payload.name, email: payload.email, role: 'user' }
-               const accessToken = jwt.sign(credentials, envData.secretKey as string, { expiresIn: '3h' });
+               const accessToken = jwt.sign(credentials, envData.secretKey as string, { expiresIn: '5h' });
                return accessToken
           }
      } 
