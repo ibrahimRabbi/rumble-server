@@ -16,7 +16,6 @@ export const signupService = async (payload: Tuser) => {
 
      const finalUserData: Tuser = {
           ...payload,
-          role: 'user',
           deliverAddress: [{
                name: payload?.name,
                phone: payload?.phone,
@@ -29,7 +28,7 @@ export const signupService = async (payload: Tuser) => {
 
      if (insertUser) {
           const credentials = { name: payload.name, email: payload.email, role: 'user' }
-          const accessToken = jwt.sign(credentials, envData.secretKey as string, { expiresIn: '5h' });
+          const accessToken = jwt.sign(credentials, envData.secretKey as string, { expiresIn: '7d' });
           return accessToken
      }
 
@@ -65,14 +64,14 @@ export const providerSignupService = async (payload: Tprovider) => {
 
      if (checkUserExistancy) {
           const credentials = { name: payload.name, email: payload.email, role: 'user' }
-          const accessToken = jwt.sign(credentials, envData.secretKey as string, { expiresIn: '5h' });
+          const accessToken = jwt.sign(credentials, envData.secretKey as string, { expiresIn: '7d' });
           return accessToken
           
      } else {
           const insertUser = await userModel.create(userData)
           if (insertUser) {
                const credentials = { name: payload.name, email: payload.email, role: 'user' }
-               const accessToken = jwt.sign(credentials, envData.secretKey as string, { expiresIn: '5h' });
+               const accessToken = jwt.sign(credentials, envData.secretKey as string, { expiresIn: '7d' });
                return accessToken
           }
      } 

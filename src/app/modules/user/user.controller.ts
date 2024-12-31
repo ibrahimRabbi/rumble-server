@@ -25,6 +25,7 @@ export const otpVerifyController = async (req: Request, res: Response, next: Nex
 
 
 
+
 export const providerSignupController = async (req: Request, res: Response, next: NextFunction) => {
     try {
         const insertUserAndGetToken = await providerSignupService(req.body)
@@ -39,6 +40,17 @@ export const providerSignupController = async (req: Request, res: Response, next
 export const getsingleUserController = async (req: Request, res: Response, next: NextFunction) => {
     try {
         const getUser = await userModel.findOne({ email: req.user?.email })
+        res.status(200).json({ success: true, status: 200, response: getUser })
+    } catch (err: any) {
+        next({ statusCode: 401, err })
+    }
+}
+
+
+export const getAllUserController = async (req: Request, res: Response, next: NextFunction) => {
+    console.log('get all user')
+    try {
+        const getUser = await userModel.find()
         res.status(200).json({ success: true, status: 200, response: getUser })
     } catch (err: any) {
         next({ statusCode: 401, err })

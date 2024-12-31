@@ -7,11 +7,13 @@ export type TorderDetails = { name: string, number: string, address: string, dis
 
 export type Torder = {
     email: string,
+    userId : Types.ObjectId
     orderId : string,
-    items: Tcart[] | Types.ObjectId,
+    items: Tcart[],
     totalQuantity:number
     deliverDetails: TorderDetails,
-    amount: number,
+    delivaryCharge : number
+    TotalAmount: number,
     color: string,
     size:string
     paymentStatus: 'paid' | 'unpaid' ,

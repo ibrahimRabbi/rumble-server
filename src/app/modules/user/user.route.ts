@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { deleteAddressController, getsingleUserController, otpVerifyController, providerSignupController, signupController, updateUserController } from "./user.controller";
+import { deleteAddressController, getAllUserController, getsingleUserController, otpVerifyController, providerSignupController, signupController, updateUserController } from "./user.controller";
 import { aunthentication } from "../../middleWare/Authentication";
 import { emailVerification } from "../../middleWare/emailVerification";
 
@@ -9,9 +9,11 @@ signupRoute.post('/sign-up', emailVerification, signupController)
 
 signupRoute.post('/verify', otpVerifyController)
 
-signupRoute.post('/provider-signup', providerSignupController)
+// signupRoute.post('/provider-signup', providerSignupController)
 
 signupRoute.get('/get-user', aunthentication, getsingleUserController),
+    
+signupRoute.get('/getAllUser', getAllUserController),
 
 signupRoute.patch(`/update-user`, aunthentication, updateUserController)
 

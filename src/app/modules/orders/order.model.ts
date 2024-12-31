@@ -1,6 +1,23 @@
-import mongoose, { model, Schema } from "mongoose";
+import mongoose, { model, Schema, Types } from "mongoose";
 import { Torder, TorderDetails } from "./order.interface";
-import { cartSchema } from "../cart/cart.model";
+
+
+export type TItem = {
+    email?: string,
+    productId: Types.ObjectId,
+    quantity: number,
+    size: string,
+    color:string
+}
+
+export const itemSchema = new Schema<TItem>({
+    email: { type: String },
+    productId: { type: Schema.Types.ObjectId, ref: 'products', required: true },
+    quantity: { type: Number, required: true },
+    color: { type: String, required: true },
+    size: { type: String, required: true }
+})
+
 
 
 const deliverDetails = new Schema<TorderDetails>({
@@ -11,17 +28,21 @@ const deliverDetails = new Schema<TorderDetails>({
 })
 
 
+
+
+
+
 const OrderSchema = new Schema<Torder>({
     email: { type: String, required: true, trim: true },
-    orderId : {type:String, required:true,trim:true},
-    items: { type: mongoose.Schema.Types.Mixed, ref:'products', required: true },
+    userId : {type:Schema.Types.ObjectId,required:true,ref:'users'},
+    orderId : {type:String, required:true, trim:true},
+    items: { type: [itemSchema], required: true },
     totalQuantity: { type: Number, required : true},
     deliverDetails: { type: deliverDetails, required: true },
-    amount: { type: Number, required: true }, 
-    color: { type: String, required: true },
-    size: { type: String, required: true },
+    delivaryCharge : {type:Number, required:true},
+    TotalAmount: { type: Number, required: true }, 
     paymentStatus: { type: String, enum: ['paid','unpaid'], required: true, trim: true },
-    orderStatus: { type: String, enum: ['pending', 'confirmed', 'delivered'], required: true, trim: true }
+    orderStatus: { type: String, enum: ['pending', 'confirmed', 'delivered','cenceled'], required: true, trim: true }
 },{timestamps:true})
 
 

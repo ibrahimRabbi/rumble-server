@@ -1,11 +1,9 @@
-import { SortOptions } from "./products.interface"
 import { productModel } from "./products.model"
 
 
 
 export const getProductServices = async (query: any) => {
 
-    console.log(query.category)
     if (query.category === "null") {
         const finding = await productModel.find().limit(parseInt(query.limit))
         return finding
@@ -23,7 +21,7 @@ export const getProductServices = async (query: any) => {
 
 
     if (query.category) {
-        if (query.category === 'watchs and bags') {
+        if (query.category === 'watchs bags') {
 
             const findingData = await productModel.find({
                 $or: [
@@ -74,7 +72,15 @@ export const getProductServices = async (query: any) => {
         return findOfferProducts
     }
 
-    const finding = await productModel.find().limit(parseInt(query.limit))
+
+    if (query.stockOut) {
+        const finding = await productModel.find({ stock: { $lt: 1 } })
+        return finding
+    }
+
+
+
+    const finding = await productModel.find().limit(parseInt(query.limit)).sort({ createdAt: -1 })
     return finding
 
 

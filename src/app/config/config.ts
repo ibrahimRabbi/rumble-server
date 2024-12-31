@@ -8,7 +8,8 @@ const envData = {
     port: process.env.PORT,
     secretKey: process.env.SECRET_KEY,
     email : process.env.EMAIL,
-    emailPassword: process.env.EMAIL_PASSWORD
+    emailPassword: process.env.EMAIL_PASSWORD,
+    clientUrl: process.env.CLIENT_URL
 }
 
 export default envData

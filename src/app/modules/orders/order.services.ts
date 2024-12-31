@@ -59,9 +59,9 @@ export const getOrderService = async (email: string, query: any) => {
                 { orderId: { $regex: query.search, $options: 'i' } },
                 {orderId : query.search}
             ]
-         }).sort({ createdAt: -1 })
+        }).sort({ createdAt: -1 }).populate('items.productId')
         return finded
     }
-    const finded = await OrderModel.find({ email: email }).sort({ createdAt: -1 })
+    const finded = await OrderModel.find({ email: email }).sort({ createdAt: -1 }).populate('items.productId')
     return finded
 }
