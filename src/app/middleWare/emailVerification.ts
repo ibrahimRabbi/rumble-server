@@ -7,12 +7,12 @@ import { userModel } from '../modules/user/user.model';
 
 export const emailVerification = async (req: Request, res: Response, next: NextFunction) => {
 
-    //const generate = parseInt(Math.random().toString().split('.')[1].slice(0, 6))
+     
     const OTP = Math.floor(100000 + Math.random() * 900000)
      
 
     try {
-        const checkExistancy = await userModel.findOne({ email: req?.body?.email })
+        const checkExistancy = await userModel.findOne({ email: { $eq: req?.body?.email } })
         if (checkExistancy) {
             throw new Error('this user already exist please use another email')
         }

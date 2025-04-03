@@ -34,7 +34,7 @@ export const getOrderController = async (req: Request, res: Response, next: Next
 
 export const getSingleOrderController = async (req: Request, res: Response, next: NextFunction) => { 
     try {
-        const orders = await OrderModel.findById(req.query?.id).populate('items.productId')
+        const orders = await OrderModel.findById(req.query?.id).populate('userId').populate('items.productId')
         res.status(200).json({ success: true, status: 200, response: orders })
     } catch (err: any) {
         next(err)
@@ -64,6 +64,22 @@ export const updateOrderController = async (req: Request, res: Response, next: N
     try {
         const update = await OrderModel.findByIdAndUpdate(req.query?.id,{orderStatus:req.body.status},{new:true,upsert:true})
         res.status(200).json({ success: true, status: 200, response: update })
+    } catch (err: any) {
+        next(err)
+    }
+}
+
+
+
+
+export const addNoteController = async (req: Request, res: Response, next: NextFunction) => {
+console.log(req.body,req.query)
+    try {
+        const update = await OrderModel.findByIdAndUpdate(
+            req.query?.id,
+            { $push: { note: req.body.status, date: new Date() } }, { new: true, upsert: true })
+        console.log(update)
+        //res.status(200).json({ success: true, status: 200, response: update })
     } catch (err: any) {
         next(err)
     }

@@ -1,8 +1,7 @@
-
-export type Tuser = {
+export type Tadmin = {
     name: string,
     email: string,
     password: string,
-    role?: 'customer' | 'admin' | 'seller',
+    role: 'admin',
     isDeleted: boolean
 }

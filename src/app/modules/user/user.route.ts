@@ -1,23 +1,21 @@
 import { Router } from "express";
-import { deleteAddressController, getAllUserController, getsingleUserController, otpVerifyController, providerSignupController, signupController, updateUserController } from "./user.controller";
-import { aunthentication } from "../../middleWare/Authentication";
+import { adminCreateController, customerSignupController, getAdminUserController, getAllUserController, sendOtpController } from "./user.controller";
 import { emailVerification } from "../../middleWare/emailVerification";
+import { aunthentication } from "../../middleWare/Authentication";
 
-export const signupRoute = Router()
+export const userRoute = Router()
 
-signupRoute.post('/sign-up', emailVerification, signupController)
+userRoute.post('/send-otp', emailVerification, sendOtpController)
 
-signupRoute.post('/verify', otpVerifyController)
+userRoute.post('/create-customer', customerSignupController)
 
-// signupRoute.post('/provider-signup', providerSignupController)
-
-signupRoute.get('/get-user', aunthentication, getsingleUserController),
+userRoute.post('/create-admin', adminCreateController)
     
-signupRoute.get('/getAllUser', getAllUserController),
+userRoute.get('/getAllUser', getAllUserController)
 
-signupRoute.patch(`/update-user`, aunthentication, updateUserController)
+userRoute.get('/getAdminUser', aunthentication, getAdminUserController)
 
-signupRoute.patch(`/delete-address`, aunthentication, deleteAddressController)
+
 
 
 

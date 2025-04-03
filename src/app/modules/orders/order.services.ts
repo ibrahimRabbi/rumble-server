@@ -18,7 +18,8 @@ export const createOrderservice = async (payload: Torder) => {
     const orderData: Torder = {
         ...payload,
         paymentStatus: 'unpaid',
-        orderStatus : 'pending',
+        orderStatus: 'pending',
+        notes:[],
         orderId: id
     }
     

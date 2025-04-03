@@ -28,3 +28,38 @@ export const signInService = async (payload:TsignIn) => {
     const accessToken = jwt.sign(credentials, envData.secretKey as string, { expiresIn: '7d' })
     return accessToken
 }
+
+
+
+
+
+
+
+export const adminSignInService = async (payload: TsignIn) => {
+    const checkExistancy = await userModel.findOne({ email: payload.email })
+
+
+    if (!checkExistancy) {
+        throw new Error('admin is not exist')
+    }
+
+    if (checkExistancy.password !== payload.password) {
+        throw new Error('invalid password')
+    }
+
+    if (checkExistancy.isDeleted) {
+        throw new Error('unthorized user')
+    }
+
+    if (checkExistancy.role !== 'admin') {
+        throw new Error('unthorized user')
+    }
+
+    const credentials = {
+        name: checkExistancy.name,
+        email: checkExistancy.email,
+        role: checkExistancy.role,
+    }
+    const adminToken = jwt.sign(credentials, envData.secretKey as string, { expiresIn: '7d' })
+    return adminToken
+}
